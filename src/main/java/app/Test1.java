@@ -1,7 +1,10 @@
 package app;
 
 import config.ApplicationContext;
-import model.Library;
+import model.AbstractLibrary;
+import model.impl.Book;
+import model.impl.SchoolLibrary;
+import model.impl.UniversityLibrary;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Test1 {
@@ -17,7 +20,15 @@ public class Test1 {
     }
 
     private static void testAdviceBefore(AnnotationConfigApplicationContext context) {
-        Library library = context.getBean(Library.class);
-        library.getBook();
+        Book book = context.getBean(Book.class);
+        UniversityLibrary universityLibrary = context.getBean(UniversityLibrary.class);
+        universityLibrary.getBook();
+        universityLibrary.returnBook();
+        universityLibrary.getMagazine();
+        universityLibrary.getBook("Преступление и наказание");
+        universityLibrary.getBook(book);
+
+        SchoolLibrary schoolLibrary = context.getBean(SchoolLibrary.class);
+        schoolLibrary.getBook();
     }
 }
