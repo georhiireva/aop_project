@@ -1,28 +1,30 @@
 package model.impl;
 
 import model.AbstractLibrary;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UniversityLibrary extends AbstractLibrary {
+
     @Override
-    public void getBook() {
-        System.out.println("Мы берем книгу в библиотеке университета");
+    public void addBook(Book book) {
+        super.addBook(book);
     }
 
-    public void returnBook() {
-        System.out.println("Мы возвращаем книгу в блиблиотеку университета");
+    @Override
+    public Book getBook(String name) {
+        return super.getBook(name);
     }
 
-    public void getMagazine() {
-        System.out.println("Мы берем журнал в библиотеке университета");
+    @Override
+    public void returnBook(Book book) {
+        super.returnBook(book);
     }
 
-    public void getBook(String bookName) {
-        System.out.println("Мы берем книгу в библиотеке университета: " + bookName);
-    }
-
-    public void getBook(Book book) {
-        System.out.println("Мы берем книгу в библиотеке университета: " + book.getName());
+    @Override
+    @Value("${university.library.name}")
+    public void setName(String name) {
+        super.setName(name);
     }
 }
