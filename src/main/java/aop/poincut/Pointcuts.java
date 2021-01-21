@@ -41,4 +41,16 @@ public class Pointcuts {
      */
     @Pointcut("execution(* returnBook(..))")
     public void allReturnBookMethods(){}
+
+    /**
+     * Этот пойнткат затронет абсолютно все методы в классе CentralLibrary
+     */
+    @Pointcut("execution(* model.impl.CentralLibrary.*(..))")
+    public void allCentralLibraryMethods(){}
+
+    /**
+     * пойнткат для всех public Book getBook(String) методов (в любых классах)
+     */
+    @Pointcut("execution(public model.impl.Book getBook(String)))")
+    public void allPubicBookGetBookMethodsWithStringArgs(){}
 }

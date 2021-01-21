@@ -36,7 +36,7 @@ public class AfterReturningAspect {
         return retVal;
     }
 
-    @AfterReturning(value = "execution(public model.impl.Book getBook(String)))")
+    @AfterReturning(value = "aop.poincut.Pointcuts.allPubicBookGetBookMethodsWithStringArgs() && ! aop.poincut.Pointcuts.allCentralLibraryMethods()")
     public void afterReturningGetBookMethod(JoinPoint joinPoint) {
         System.out.println("afterReturningGetBookMethod: демонстрация работы JoinPoint");
         System.out.println("afterReturningGetBookMethod: сигнатура метода: " + joinPoint.getSignature());
