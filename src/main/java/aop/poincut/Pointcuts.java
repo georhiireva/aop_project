@@ -28,4 +28,17 @@ public class Pointcuts {
      */
     @Pointcut("execution(void *(..))")
     public void allVoidMethods(){}
+
+    /**
+     * Этот пойнткат затронет абсолютно все методы в классе SchoolLibrary
+     */
+    @Pointcut("execution(* model.impl.SchoolLibrary.*(..))")
+    public void allSchoolLibraryMethods(){}
+
+    /**
+     * Этот пойнткат затроен все методы с названием returnBook
+     * и любым количеством аргументов и любым возвращаемым значением
+     */
+    @Pointcut("execution(* returnBook(..))")
+    public void allReturnBookMethods(){}
 }

@@ -22,7 +22,9 @@ import java.util.stream.Collectors;
  * Поэтому с помощью @AfterReturning Advice возможно изменять возвращаемый результат метод
  */
 public class AfterReturningAspect {
-    @AfterReturning(pointcut = "!aop.poincut.Pointcuts.allVoidMethods()", returning = "retVal")
+    @AfterReturning(
+            pointcut = "aop.poincut.Pointcuts.allSchoolLibraryMethods() && !aop.poincut.Pointcuts.allVoidMethods()",
+            returning = "retVal")
     public Object changeReturningValueAfterReturnBookMethod(Object retVal) {
         if (retVal instanceof String) {
             return "Измененное значение";
@@ -34,8 +36,8 @@ public class AfterReturningAspect {
         return retVal;
     }
 
-    @AfterReturning(value = "execution(public model.impl.Book getBook(String)))", returning = "retVal")
-    public void afterReturningGetBookMethod(JoinPoint joinPoint, Book retVal) {
+    @AfterReturning(value = "execution(public model.impl.Book getBook(String)))")
+    public void afterReturningGetBookMethod(JoinPoint joinPoint) {
         System.out.println("afterReturningGetBookMethod: демонстрация работы JoinPoint");
         System.out.println("afterReturningGetBookMethod: сигнатура метода: " + joinPoint.getSignature());
         System.out.println(
