@@ -53,4 +53,10 @@ public class Pointcuts {
      */
     @Pointcut("execution(public model.impl.Book getBook(String)))")
     public void allPubicBookGetBookMethodsWithStringArgs(){}
+
+    /**
+     * Этот пойнткат затронет абсолютно все методы в классе TownLibrary
+     */
+    @Pointcut("execution(* model.impl.TownLibrary.*(..))")
+    public void allTownLibraryMethods(){}
 }

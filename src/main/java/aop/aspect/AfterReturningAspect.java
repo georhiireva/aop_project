@@ -12,15 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * выполняется только после нормального окончания метода с основной логикой
+ * выполняется только после нормального окончания метода с основной логикой,
+ * но до присвоения результата этого метода какой-либо переменной.
+ * Поэтому с помощью @AfterReturning Advice возможно изменять возвращаемый результат метода
  */
 @Component
 @Aspect
-/**
- * выполняется только после нормального окончания метода с основной логикой,
- * но до присвоения результата этого метода какой-либо переменной.
- * Поэтому с помощью @AfterReturning Advice возможно изменять возвращаемый результат метод
- */
+
 public class AfterReturningAspect {
     @AfterReturning(
             pointcut = "aop.poincut.Pointcuts.allSchoolLibraryMethods() && !aop.poincut.Pointcuts.allVoidMethods()",
@@ -36,7 +34,9 @@ public class AfterReturningAspect {
         return retVal;
     }
 
-    @AfterReturning(value = "aop.poincut.Pointcuts.allPubicBookGetBookMethodsWithStringArgs() && ! aop.poincut.Pointcuts.allCentralLibraryMethods()")
+    @AfterReturning(value = "aop.poincut.Pointcuts.allPubicBookGetBookMethodsWithStringArgs() " +
+            "&& ! aop.poincut.Pointcuts.allCentralLibraryMethods()" +
+            "&& ! aop.poincut.Pointcuts.allTownLibraryMethods()")
     public void afterReturningGetBookMethod(JoinPoint joinPoint) {
         System.out.println("afterReturningGetBookMethod: демонстрация работы JoinPoint");
         System.out.println("afterReturningGetBookMethod: сигнатура метода: " + joinPoint.getSignature());
